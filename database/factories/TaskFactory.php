@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Tag;
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class TagFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tag::class;
+    protected $model = Task::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,11 @@ class TagFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->word(20);
         return [
-            'name' => $name,
-            'slug' => Str::slug($name),
-            'color' => $this->faker->randomElement(['red', 'yellow', 'blue', 'indigo', 'pink'])
+            'user_id' => User::all()->random()->id,
+            'cv_task' => $this->faker->unique()->word(10),
+            'title' => $this->faker->unique()->word(10),
+            'description' => $this->faker->text(40)
         ];
     }
 }
